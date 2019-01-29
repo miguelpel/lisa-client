@@ -10,7 +10,7 @@ class Form extends Component {
             message: '',
             messageList: []
         };
-        this.listenMessages()
+        //this.listenMessages()
     }
 
     componentWillReceiveProps(nextProps){
@@ -19,7 +19,7 @@ class Form extends Component {
         }
     }
 
-    handleChange(){
+    handleChange(event){
         this.setState({message: event.target.value});
     }
 
@@ -31,6 +31,7 @@ class Form extends Component {
             }
             // addMessage(newItem)
             // send message to Bot, and attach callBack this.addMessage(message)
+            this.setState({message: ''})
         }
     }
 
@@ -52,7 +53,7 @@ class Form extends Component {
         return(
             <div className="form">
                 <div className="form_message">
-                    {this.state.list.map((item, index) => <Message key={index} message={item} />)}
+                    {this.state.messageList.map((item, index) => <Message key={index} message={item} />)}
                 </div>
                 <div className="form_row">
                     <input
@@ -60,12 +61,12 @@ class Form extends Component {
                         type="text"
                         placeholder="Type Message"
                         value={this.state.message}
-                        onChange={this.handleChange.bind(this)}
-                        onKeyPress={this.handleKeyPress.bind(this)}
+                        onChange={event => this.handleChange(event)}
+                        onKeyPress={event => this.handleKeyPress(event)}
                     />
                     <button
                         className="form_button"
-                        onClick={this.handleSand.bind(this)}
+                        onClick={event => this.handleSend(event)}
                     >
                         send
                     </button>
