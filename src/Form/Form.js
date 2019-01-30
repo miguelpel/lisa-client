@@ -29,6 +29,20 @@ class Form extends Component {
                 userName: this.state.userName,
                 message: this.state.message
             }
+            const lisaUrl = 'https://lisa-server.herokuapp.com/superscript?'
+            const whitespaceRegExp = new RegExp('/\s/g')
+            const url = newItem.message.match(whitespaceRegExp) ?
+            `${lisaUrl}message="${newItem.message}"`:
+            `${lisaUrl}message=${newItem.message}`
+            console.log(url)
+            fetch(url, {mode: 'no-cors'}).then(response => response.json()).then(data => {
+                    var responseItem = {
+                        userName: 'Lisa',
+                        message: data.message
+                    }
+                    console.log(responseItem.message)
+                    this.addMessage(responseItem)
+                })
             // addMessage(newItem)
             // send message to Bot, and attach callBack this.addMessage(message)
             this.setState({message: ''})
@@ -44,9 +58,9 @@ class Form extends Component {
         // item.userName
         // item.message
         // (+ mood) ???
-        // var newMessage = message
-        // var messages = this.state.messageList.slice(0).push(item) ???
-        // add message this.setState()
+        var newMessage = item.message
+        var messages = this.state.messageList.slice(0).push(newMessage)
+        this.setState({messageList: messages})
     }
 
     render(){
