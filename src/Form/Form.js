@@ -35,17 +35,31 @@ class Form extends Component {
             `${lisaUrl}message="${newItem.message}"`:
             `${lisaUrl}message=${newItem.message}`
             console.log(url)
-            fetch(url, {mode: 'no-cors'}).then(response => response.json()).then(data => {
-                    var responseItem = {
-                        userName: 'Lisa',
-                        message: data.message
-                    }
-                    console.log(responseItem.message)
-                    this.addMessage(responseItem)
-                })
+
+            var req = new XMLHttpRequest()
+            req.open("GET", url)
+            req.send()
+
+            req.onload = function() {
+                if (req.status !== 200) {
+                    console.log(req.status + ':' + req.status.text)
+                } else {
+                    console.log(req.responseText)
+                }
+            }
+
+            // Fetch API gives me a CORS error in chrome
+//            fetch(url, {method: "GET", headers: {"Content-Type": "text/plain"}}).then(response => response.json()).then(data => {
+//                    var responseItem = {
+//                        userName: 'Lisa',
+//                        message: data.message
+//                    }
+//                    console.log(responseItem.message)
+//                    this.addMessage(responseItem)
+//                })
             // addMessage(newItem)
             // send message to Bot, and attach callBack this.addMessage(message)
-            this.setState({message: ''})
+//            this.setState({message: ''})
         }
     }
 
