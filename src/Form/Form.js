@@ -32,8 +32,8 @@ class Form extends Component {
             const lisaUrl = 'https://lisa-server.herokuapp.com/superscript?'
             const whitespaceRegExp = new RegExp('/\s/g')
             const url = newItem.message.match(whitespaceRegExp) ?
-            `${lisaUrl}message="${newItem.message}"`:
-            `${lisaUrl}message=${newItem.message}`
+            `${lisaUrl}user=${newItem.message}&message="${newItem.message}"`:
+            `${lisaUrl}user=${newItem.message}&message=${newItem.message}`
             console.log(url)
 
             var req = new XMLHttpRequest()
