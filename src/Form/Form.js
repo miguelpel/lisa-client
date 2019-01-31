@@ -29,7 +29,7 @@ class Form extends Component {
                 userName: this.state.userName,
                 message: this.state.message
             }
-            
+
             const lisaUrl = 'https://lisa-server.herokuapp.com/superscript?'
             const whitespaceRegExp = new RegExp('/\s/g')
             const url = newItem.message.match(whitespaceRegExp) ?
@@ -37,30 +37,12 @@ class Form extends Component {
             `${lisaUrl}user=${newItem.userName}&message=${newItem.message}`
             console.log(url)
 
-            var req = new XMLHttpRequest()
-            req.open("GET", url)
-            req.send()
-
-            req.onload = function() {
-                if (req.status !== 200) {
-                    console.log(req.status + ':' + req.status.text)
-                } else {
-                    console.log(req.responseText)
-                }
-            }
-
-            // Fetch API gives me a CORS error in chrome
-//            fetch(url, {method: "GET", headers: {"Content-Type": "text/plain"}}).then(response => response.json()).then(data => {
-//                    var responseItem = {
-//                        userName: 'Lisa',
-//                        message: data.message
-//                    }
-//                    console.log(responseItem.message)
-//                    this.addMessage(responseItem)
-//                })
-            // addMessage(newItem)
-            // send message to Bot, and attach callBack this.addMessage(message)
-//            this.setState({message: ''})
+           fetch(url, {method: "GET",})
+               .then(response => response.json())
+               .then(item => {        
+                   console.log(item)
+                // this.addMessage(item)
+               })
         }
     }
 
