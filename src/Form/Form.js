@@ -64,7 +64,13 @@ class Form extends Component {
         return(
             <div className="form">
                 <div className="form_message">
-                    {this.state.messageList.map((item, index) => <Message key={index} message={item} />)}
+                    {this.state.messageList.map((item, index) => <Message
+                                                                    key={index}
+                                                                    from={item.userName}
+                                                                    message={item.message}
+                                                                    />
+                                                    )
+                        }
                 </div>
                 <div className="form_row">
                     <input
