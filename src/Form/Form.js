@@ -66,19 +66,32 @@ class Form extends Component {
         // item.message
         // (+ mood) ???
         // var newMessage = item.message
+        // go to #input
         var messages = this.state.messageList.slice(0)
         if (this.state.messageList.length > 0) {
             messages.push(item)
         } else {
             messages = [item]
         }
-        this.setState({messageList: messages})
+        this.setState({messageList: messages}, () => this.scrollDown())
+    }
+
+    scrollDown(){
+        window.scrollTo(0, document.body.clientHeight)
     }
 
     render(){
+        // refaire ce positionnement des elements
+        const messageContainerStyle = {
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '10px',
+                maxWidth: '300px',
+                minHeight: window.innerHeight - 60
+        }
         return(
             <div className="form">
-                <div className="form_message">
+                <div style={messageContainerStyle}>
                     {this.state.messageList.map((item, index) => <Message
                                                                     key={index}
                                                                     userName={item.userName}

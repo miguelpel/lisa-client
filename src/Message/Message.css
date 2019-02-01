@@ -1,0 +1,73 @@
+body{
+    background-color: lightblue;
+    font-family: "Ubuntu-Italic", "Lucida Sans", helvetica, sans;
+}
+  
+/* container */
+.container {
+    padding: 5% 5%;
+}
+
+/* CSS talk bubble */
+.talk-bubble {
+    margin: 5px;
+    padding: 6px 0;
+    display: inline-block;
+    position: relative;
+    width: 80%;
+    min-height: 30px;
+    height: auto;
+    background-color: lightyellow;
+}
+
+.round{
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+.align-right{
+    align-self: flex-end 
+}
+
+.tri-right.left-in:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -10px;
+    right: auto;
+    top: 10px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: lightyellow lightyellow transparent transparent;
+}
+
+.tri-right.right-in:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -10px;
+    top: 10px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: lightyellow transparent transparent lightyellow;
+}
+  
+/* talk bubble contents */
+.talktext{
+    padding: 0 1em;
+    margin:0;
+    text-align: left;
+    line-height: 1.2em;
+}
+
+.talktext p{
+    /* remove webkit p margins */
+    padding: 0;
+    margin:0;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}

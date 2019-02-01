@@ -14,9 +14,6 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <h2>
-          Simple Chat Test
-        </h2>
         <div className="app_list">
           <Form user={this.state.user} />
         </div>
