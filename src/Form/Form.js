@@ -30,19 +30,29 @@ class Form extends Component {
                 message: this.state.message
             }
 
+            this.addMessage(newItem)
+
             const lisaUrl = 'https://lisa-server.herokuapp.com/superscript?'
-            const whitespaceRegExp = new RegExp('/\s/g')
-            const url = newItem.message.match(whitespaceRegExp) ?
-            `${lisaUrl}user=${newItem.userName}&message="${newItem.message}"`:
-            `${lisaUrl}user=${newItem.userName}&message=${newItem.message}`
+
+            // UNNECESSARY
+            // const whitespaceRegExp = new RegExp('/\s/g')
+            // const url = newItem.message.match(whitespaceRegExp) ?
+            // `${lisaUrl}user=${newItem.userName}&message="${newItem.message}"`:
+            // `${lisaUrl}user=${newItem.userName}&message=${newItem.message}`
+
+            const url = `${lisaUrl}user=${newItem.userName}&message=${newItem.message}`
+
             console.log(url)
 
            fetch(url, {method: "GET",})
                .then(response => response.json())
                .then(item => {        
-                   console.log(item)
-                // this.addMessage(item)
+                    console.log(item)
+                    this.addMessage(item)
                })
+            this.setState({
+                message: ""
+            })
         }
     }
 
@@ -55,8 +65,13 @@ class Form extends Component {
         // item.userName
         // item.message
         // (+ mood) ???
-        var newMessage = item.message
-        var messages = this.state.messageList.slice(0).push(newMessage)
+        // var newMessage = item.message
+        var messages = this.state.messageList.slice(0)
+        if (this.state.messageList.length > 0) {
+            messages.push(item)
+        } else {
+            messages = [item]
+        }
         this.setState({messageList: messages})
     }
 
@@ -66,7 +81,7 @@ class Form extends Component {
                 <div className="form_message">
                     {this.state.messageList.map((item, index) => <Message
                                                                     key={index}
-                                                                    from={item.userName}
+                                                                    userName={item.userName}
                                                                     message={item.message}
                                                                     />
                                                     )

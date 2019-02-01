@@ -6,9 +6,9 @@ class Message extends Component {
         return (
             <div className="message_author">
                 <span className="message_author">
-                    {this.props.message.userName}:
+                    {this.props.userName}:
                 </span>
-                {this.props.message.message}
+                {this.props.message}
             </div>
         )
     }
